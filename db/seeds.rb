@@ -15,6 +15,7 @@ Topmovie.all.each do |movie|
     run_time: movie_hash["Runtime"],
     genre: movie_hash["Genre"],
     plot: movie_hash["Plot"],
+    rating: "TOP-MOVIE"
     # rating: movie_hash["Ratings"][0]["Value"],
   )
 end
