@@ -54,3 +54,5 @@ end
 # Used to make network requests
 # https://github.com/rest-client/rest-client
 gem "rest-client", "~> 2.1"
+
+gem 'nokogiri', '~> 1.12', '>= 1.12.3'

@@ -5,9 +5,5 @@ class ApplicationController < Sinatra::Base
   # get "/" do
   #   { message: "Good luck with your project!" }.to_json
   # end
-  get '/' do
-    movies = Movie.all.order(:name).limit(10)
-    movies.to_json
-  end
 
 end

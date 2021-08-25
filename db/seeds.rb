@@ -2,15 +2,11 @@ puts "🌱 Seeding spices..."
 
 # Seed your database here
 puts "Creating movies..."
-# these are the spells we want to add to the database
-movies = ['The Shawshank Redemption', 'The Godfather', 'The Dark Knight', 'The Lord of the Rings: The Fellowship of the Ring', 'Pulp Fiction', "Schindler's List", 'Forrest Gump', 'Fight Club', 'Inception', 'The Matrix']
-
-# iterate over each spell
-movies.each do |movie|
-  response = RestClient.get "http://www.omdbapi.com/?t=#{movie}&apikey=429ac81a"
+# movies = ['The Shawshank Redemption', 'The Godfather', 'The Dark Knight', 'The Lord of the Rings: The Fellowship of the Ring', 'Pulp Fiction', "Schindler's List", 'Forrest Gump', 'Fight Club', 'Inception', 'The Matrix']
+Scraper.new.make_top_movies
+Topmovie.all.each do |movie|
+  response = RestClient.get "http://www.omdbapi.com/?t=#{movie.title}&apikey=429ac81a"
   movie_hash = JSON.parse(response)
-
-  # create a spell in the database using the data from this hash:
   Movie.create(
     imdb_id: movie_hash["imdbID"],
     name: movie_hash["Title"],
@@ -19,7 +15,7 @@ movies.each do |movie|
     run_time: movie_hash["Runtime"],
     genre: movie_hash["Genre"],
     plot: movie_hash["Plot"],
-    rating: movie_hash["Ratings"][0]["Value"],
+    # rating: movie_hash["Ratings"][0]["Value"],
   )
 end
 
