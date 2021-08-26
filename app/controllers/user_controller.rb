@@ -1,14 +1,13 @@
-class UserController < ApplicationController
+class UserController < Sinatra::Base
     
-    # Add your routes here
     get '/users' do
         users = User.all
-        users.to_json
+        users.to_json(methods: [:format_date])
     end
 
     get '/users/:id' do
         user = User.find(params[:id])
-        user.to_json
+        user.to_json(include: {reviews: {methods: [:imdb_id, :title, :year, :poster, :genre, :plot, :rating]}})
     end
-    
-  end
+
+end
