@@ -1,4 +1,4 @@
-class Topmovie
+class Toprated
 
     attr_accessor :title
   
@@ -15,7 +15,5 @@ class Topmovie
     def self.reset_all
       @@all.clear
     end
-  
-  end
-
+end
   

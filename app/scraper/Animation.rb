@@ -1,4 +1,4 @@
-class Topmovie
+class Animation
 
     attr_accessor :title
   
@@ -16,6 +16,4 @@ class Topmovie
       @@all.clear
     end
   
-  end
-
-  
+end
