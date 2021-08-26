@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_23_205902) do
+ActiveRecord::Schema.define(version: 2021_08_26_190717) do
 
   create_table "movies", force: :cascade do |t|
     t.string "imdb_id"
@@ -25,9 +25,11 @@ ActiveRecord::Schema.define(version: 2021_08_23_205902) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer "movie_id"
-    t.integer "users_id"
+    t.integer "user_id"
     t.text "review"
     t.datetime "date_posted"
+    t.boolean "recommend"
+    t.float "user_rating"
   end
 
   create_table "users", force: :cascade do |t|

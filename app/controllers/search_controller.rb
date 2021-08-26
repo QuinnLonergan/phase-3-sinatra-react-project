@@ -14,6 +14,7 @@ class SearchController < ApplicationController
     post '/search/addReview/:imdbID/:userName' do
         new_movie = Movie.find_or_create_by(imdb_id: params[:imdbID])
         new_user = User.find_or_create_by(name: params[:userName])
+        new_user.update(date_joined: DateTime.now)
         new_review = Review.find_or_create_by(user_id: new_user.id, movie_id: new_movie.id)
         new_review.update(review: params[:review], date_posted: DateTime.now, user_rating: params[:user_rating], recommend: params[:recommend])
         Movie.find_by(imdb_id: params[:imdbID]).reviews.to_json(include: :user);

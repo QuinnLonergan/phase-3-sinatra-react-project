@@ -14,3 +14,5 @@ use Rack::JSONBodyParser
 # Our application
 run ApplicationController
 use HomeController
+use UserController
+use SearchController
