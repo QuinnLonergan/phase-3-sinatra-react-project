@@ -14,9 +14,9 @@ class SearchController < ApplicationController
     post '/search/addReview/:imdbID/:userName' do
         new_movie = Movie.find_or_create_by(imdb_id: params[:imdbID])
         new_user = User.find_or_create_by(name: params[:userName])
-        new_user.update(date_joined: DateTime.now)
-        new_user.update(profile_pic: ["https://i.imgur.com/HpCcDUy.jpeg","https://i.imgur.com/Y7GZn77.jpeg","https://i.imgur.com/iBGfZ9T.png"].sample)
-        new_user.update(fav_movie: ["The Godfather", "The Godfather Part II", "The Godfather Part III", "The Lion King", "Kicking and Screaming", "Jumanji", "Bratz", "Legend of the Guardians: The Owls of Ga'Hoole", "Garfield", "Hot Rod"].sample)
+        new_user.update(date_joined: DateTime.now) if new_user.date_joined.nil?
+        new_user.update(profile_pic: ["https://i.imgur.com/HpCcDUy.jpeg","https://i.imgur.com/Y7GZn77.jpeg","https://i.imgur.com/iBGfZ9T.png"].sample) if new_user.profile_pic.nil?
+        new_user.update(fav_movie: ["The Godfather", "The Godfather Part II", "The Godfather Part III", "The Lion King", "Kicking and Screaming", "Jumanji", "Bratz", "Legend of the Guardians: The Owls of Ga'Hoole", "Garfield", "Hot Rod"].sample) if new_user.fav_movie.nil?
         new_review = Review.find_or_create_by(user_id: new_user.id, movie_id: new_movie.id)
         new_review.update(review: params[:review], date_posted: DateTime.now, user_rating: params[:user_rating], recommend: params[:recommend])
         Movie.find_by(imdb_id: params[:imdbID]).reviews.to_json(include: :user);
